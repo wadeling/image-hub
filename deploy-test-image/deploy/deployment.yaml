@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wade-k8s-deployment
+  labels:
+    app: wade-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wade-k8s
+  template:
+    metadata:
+      labels:
+        app: wade-k8s
+    spec:
+      containers:
+      - name: wade-k8s
+        image: wade23/deploy:deploytest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6100
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wade-test-service
+spec:
+  selector:
+    app: wade-k8s
+  ports:
+    - name: http
+      protocol: TCP
+      port: 6100
+      targetPort: 6100
