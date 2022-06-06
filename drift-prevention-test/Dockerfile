@@ -6,7 +6,7 @@ COPY ["@", "/home/@"]
 COPY ["-", "/home/-"]
 COPY ["#", "/home/#"]
 # tricky way to add file '*' in macos,but not suitable for linux
-ADD ./"'*'" /home
+#ADD ./"'*'" /home
 COPY ?.sh /home/?.sh
 COPY dp-test.sh /home/dp-test.sh
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
